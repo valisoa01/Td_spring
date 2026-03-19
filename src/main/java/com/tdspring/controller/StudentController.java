@@ -23,9 +23,17 @@ public class StudentController {
                 .body("Welcome" + name);
     }
     @PostMapping("/students")
-    public String addStudent(@RequestBody List<Student> studentList) {
-         studentService.addStudent(studentList);
-         return studentService.getAllStudentName(studentService.getAllStudent());
+    public ResponseEntity<List<Student>> addStudent(@RequestBody List<Student> studentList) {
+        try {
+            studentService.addStudent(studentList);
+            return  ResponseEntity
+                    .status(201)
+                    .body(studentService.getAllStudent());
+        } catch (Exception e){
+            return ResponseEntity
+                    .status(500)
+                    .build();
+        }
     }
     @GetMapping("students")
     public List<Student> getAllStudent() {
