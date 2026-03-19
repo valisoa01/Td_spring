@@ -35,9 +35,40 @@ public class StudentController {
                     .build();
         }
     }
-    @GetMapping("students")
-    public List<Student> getAllStudent() {
-        return studentService.getAllStudent();
+    @GetMapping("/students")
+    public ResponseEntity<?> getAllStudent(
+            @RequestHeader(value = "Accept", required = false) String acceptHeader) {
+
+        try {
+             if (acceptHeader == null) {
+                return ResponseEntity
+                        .status(400)
+                        .body("Accept header is missing");
+            }
+
+             if (!acceptHeader.equals("application/json") && !acceptHeader.equals("text/plain")) {
+                return ResponseEntity
+                        .status(501)
+                        .body("Format not supported");
+            }
+
+            List<Student> students = studentService.getAllStudent();
+
+             if (acceptHeader.equals("application/json")) {
+                return ResponseEntity
+                        .ok(students);
+            }
+
+             String result = studentService.getAllStudentName(students);
+
+            return ResponseEntity
+                    .ok(result);
+
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(500)
+                    .body("Internal server error");
+        }
     }
 
 }
