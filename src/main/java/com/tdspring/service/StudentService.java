@@ -19,6 +19,7 @@ public class StudentService {
     }
     public String getAllStudentName(List<Student> studentList) {
         return studentList.stream()
-                .map(student -> student.getStudentFullName(student)).collect(Collectors.joining(", "));
+                .map(student -> student.getStudentFullName(student))
+                .collect(Collectors.joining(", "));
     }
 }
