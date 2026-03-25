@@ -9,7 +9,7 @@ public class Student {
     private String lastName;
     private int age;
 
-    public String getStudentFullName(Student student) {
-        return student.getFirstName() + " " + student.getLastName();
+    public String getStudentFullName() {
+        return firstName + " " + lastName;
     }
 }

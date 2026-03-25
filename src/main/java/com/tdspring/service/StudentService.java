@@ -1,6 +1,7 @@
 package com.tdspring.service;
 
 import com.tdspring.model.Student;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
     private final List<Student> students = new ArrayList<>();
 
@@ -16,10 +18,5 @@ public class StudentService {
     }
     public List<Student> getAllStudent() {
         return students;
-    }
-    public String getAllStudentName(List<Student> studentList) {
-        return studentList.stream()
-                .map(student -> student.getStudentFullName(student))
-                .collect(Collectors.joining(", "));
     }
 }
