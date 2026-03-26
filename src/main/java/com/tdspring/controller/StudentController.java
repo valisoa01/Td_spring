@@ -20,7 +20,7 @@ public class StudentController {
     private final StudentFormatter studentFormatter;
 
     @GetMapping("/welcome")
-    public ResponseEntity<String> welcome(@RequestParam String name) {
+    public ResponseEntity<String> welcome(@RequestParam String name) throws BadRequestException {
         if (name == null || name.isBlank()) {
             throw new BadRequestException("Le paramètre 'name' est obligatoire");
         }
@@ -28,7 +28,7 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public ResponseEntity<List<Student>> addStudent(@RequestBody List<Student> studentList) {
+    public ResponseEntity<?> addStudent(@RequestBody List<Student> studentList) {
         studentService.addStudent(studentList);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -37,7 +37,7 @@ public class StudentController {
 
     @GetMapping("/students")
     public ResponseEntity<Object> getAllStudent(
-            @RequestHeader(value = "Accept", required = false) String acceptHeader) {
+            @RequestHeader(value = "Accept", required = false) String acceptHeader) throws BadRequestException {
 
         List<Student> students = studentService.getAllStudent();
 

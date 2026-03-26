@@ -19,9 +19,7 @@ public class StudentService {
         students.addAll(newStudentList);
     }
 
-    /**
-     * Retourne tous les étudiants
-     */
+
     public List<Student> getAllStudent() {
         return new ArrayList<>(students);
     }
