@@ -37,7 +37,7 @@ public class StudentController {
 
     @GetMapping("/students")
     public ResponseEntity<Object> getAllStudent(
-            @RequestHeader(value = "Accept", required = false) String acceptHeader) throws BadRequestException {
+            @RequestHeader(value = "Accept", required = false) String acceptHeader) throws BadRequestException, NotAcceptableException {
 
         List<Student> students = studentService.getAllStudent();
 
